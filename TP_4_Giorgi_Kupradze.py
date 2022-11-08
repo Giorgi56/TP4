@@ -113,6 +113,9 @@ percolation(grille)
 per.afficher_grille(grille)
 # On ne rencontre plus le même problème
 
+# Question 11
+
+
 # Question 12
 # Avant remplissage
 grille = creation_grille(0.45, 60)
@@ -129,33 +132,29 @@ def teste_percolation(p:float, n:int):
         for j in i:
             if j == 2:
                 renvoyer = True
-    
     return renvoyer
 
 # Question 14
 def proba(p:float, k:int, n:int):
-    en_bas = 0
+    reussi = 0
     for i in range(k):
-        grille = creation_grille(p, n)
-        percolation(grille)
-        for j in grille[-1]:
-            if j == 2:
-                en_bas += 1
+        if teste_percolation(p, n):
+            reussi += 1
 
-    return en_bas / k
+    return reussi / k   # Nombre moyen de réussites
 
 def tracer_proba(n):
-    x = np.linspace(0,1,21)
+    x = np.linspace(0,1,num=21)
     y = []
     for p in x:
         y.append(proba(p,20,n))
-        plt.clf()
-        plt.plot(x,y)
-        plt.show()
-        return None
+    plt.clf()
+    plt.scatter(x,y)
+    plt.show()
 
 # Test
 tracer_proba(128)
+tracer_proba(9)
 
 # Pour tester
 # per.afficher_grille(creation_zebreh(3))
